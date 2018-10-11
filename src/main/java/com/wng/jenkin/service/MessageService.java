@@ -2,6 +2,7 @@ package com.wng.jenkin.service;
 
 import com.wng.jenkin.datamodel.Message;
 import com.wng.jenkin.datamodel.Topic;
+import com.wng.jenkin.ex.ResourceNotFoundException;
 import com.wng.jenkin.repository.MessageRepository;
 import com.wng.jenkin.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,6 @@ public class MessageService {
 
 
     MessageRepository messageRepository;
-
-
     TopicRepository topicRepository;
 
     public MessageService(MessageRepository messageRepository, TopicRepository topicRepository) {
@@ -24,7 +23,8 @@ public class MessageService {
     }
 
     public Topic getTopic(Long id) {
-        return this.topicRepository.getOne(id);
+        return this.topicRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Not found"));
     }
 
     public List<Message> getMessagesByTopicId(Long topicId) {

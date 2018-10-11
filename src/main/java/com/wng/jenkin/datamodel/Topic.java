@@ -13,9 +13,19 @@ public class Topic extends BaseEntity{
         super.setId(id);
     }
 
+    public Topic(Long id, String topic) {
+        super.setId(id);
+        this.topic = topic;
+    }
+
     private String topic;
 
 
+    public String getTopic() {
+        return topic;
+    }
 
-
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
 }
