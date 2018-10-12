@@ -10,6 +10,8 @@ public class Message extends BaseEntity{
 
 
 
+
+
     @ManyToOne
     @JoinColumn(name = "topicid", nullable = false)
     @JsonIgnore
@@ -22,6 +24,16 @@ public class Message extends BaseEntity{
 
     @Column(length = 25)
     private String username;
+
+    public Message() {
+    }
+
+    public Message(Long id, Topic topic, String message, String username) {
+        this.topic = topic;
+        this.message = message;
+        this.username = username;
+        super.setId(id);
+    }
 
     public Topic getTopic() {
         return topic;

@@ -38,7 +38,7 @@ public class MessageController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
     public void handleNotFoundException(ResourceNotFoundException ex) {
-        throw ex;
+
     }
 
 }

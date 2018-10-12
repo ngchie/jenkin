@@ -2,6 +2,8 @@ package com.wng.jenkin;
 
 import com.wng.jenkin.controller.MessageController;
 import com.wng.jenkin.datamodel.Topic;
+
+import com.wng.jenkin.ex.ResourceNotFoundException;
 import com.wng.jenkin.service.MessageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,8 +35,18 @@ public class MessageControllerUnitTest {
         given(messageService.getTopic(anyLong())).willReturn(new Topic(Long.valueOf(1), "IPHONE8"));
         this.mockMvc.perform(get("/api/messageapp/topic/1"))
                 .andExpect(status().isOk())
-                //.andExpect(jsonPath("id").value("1"))
+                .andExpect(jsonPath("id").value("1"))
                 .andExpect(jsonPath("topic").value("IPHONE8"));
     }
+
+    @Test()
+    public void getTopic_Exception() throws Exception {
+
+            given(messageService.getTopic(anyLong())).willThrow(new ResourceNotFoundException("not found"));
+            this.mockMvc.perform(get("/api/messageapp/topic/1"))
+                    .andExpect(status().isNotFound());
+
+    }
+
 
 }
