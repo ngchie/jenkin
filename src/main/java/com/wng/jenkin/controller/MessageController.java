@@ -26,8 +26,6 @@ public class MessageController {
     }
 
 
-
-
     @GetMapping(value = "/topic/{topicid}/message")
     public ResponseEntity<List<Message>> findMessageByTopic(@PathVariable("topicid") Long topicid) {
 
