@@ -1,4 +1,4 @@
-package com.wng.jenkin.service;
+package com.wng.jenkin.security.service;
 
 import org.springframework.stereotype.Service;
 

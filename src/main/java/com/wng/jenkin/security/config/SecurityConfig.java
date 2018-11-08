@@ -1,4 +1,4 @@
-package com.wng.jenkin.config;
+package com.wng.jenkin.security.config;
 
 import com.wng.jenkin.security.CustomUserDetailsService;
 import com.wng.jenkin.security.JwtAuthenticationEntryPoint;
